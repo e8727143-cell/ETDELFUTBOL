@@ -1,0 +1,8 @@
+{
+  "name": "Mundial 2026 - Centro de Recursos",
+  "description": "Una landing page optimizada para dispositivos móviles con recursos gratuitos para el Mundial 2026, incluyendo códigos de Panini y transmisiones en vivo.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
