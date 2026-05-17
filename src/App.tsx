@@ -4,7 +4,38 @@
  */
 
 import { motion } from 'motion/react';
-import { Youtube, Copy, ExternalLink, Calendar, Trophy } from 'lucide-react';
+import { Youtube, Copy, ExternalLink, Calendar, Trophy, Zap } from 'lucide-react';
+
+const AdsterraBanner = ({ adKey, height, width }: { adKey: string, height: number, width: number }) => {
+  return (
+    <div className="flex justify-center my-6 overflow-hidden">
+      <iframe
+        title={`ad-${adKey}`}
+        width={width}
+        height={height}
+        frameBorder="0"
+        scrolling="no"
+        className="max-w-full"
+        srcDoc={`
+          <html>
+            <body style="margin:0; padding:0; display:flex; justify-content:center; align-items:center;">
+              <script type="text/javascript">
+                atOptions = {
+                  'key' : '${adKey}',
+                  'format' : 'iframe',
+                  'height' : ${height},
+                  'width' : ${width},
+                  'params' : {}
+                };
+              </script>
+              <script type="text/javascript" src="https://www.highperformanceformat.com/${adKey}/invoke.js"></script>
+            </body>
+          </html>
+        `}
+      />
+    </div>
+  );
+};
 
 export default function App() {
   const currentDate = "17 de Mayo, 2026";
@@ -12,6 +43,7 @@ export default function App() {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
   const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const hotmartLink = "https://pay.hotmart.com/W99487439T?checkoutMode=10";
+  const directLink = "https://www.effectivecpmnetwork.com/gd66yvigg?key=72b3e71d5eb1dc7fc39d2aa2028e2452";
 
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
@@ -19,7 +51,15 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col items-center">
+    <div className="min-h-screen bg-slate-50 flex flex-col items-center relative">
+      {/* Sidebar Ads (Desktop Only) */}
+      <div className="hidden xl:block fixed left-4 top-1/2 -translate-y-1/2 z-40">
+        <AdsterraBanner adKey="c034714e52ebf68833220215c9a13a98" width={160} height={600} />
+      </div>
+      <div className="hidden xl:block fixed right-4 top-1/2 -translate-y-1/2 z-40">
+        <AdsterraBanner adKey="02eb1812fc7a22fa7806753abfad7294" width={160} height={300} />
+      </div>
+
       {/* Header Section */}
       <header className="w-full bg-gradient-to-r from-emerald-600 to-green-500 py-10 px-6 shadow-lg relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
@@ -34,8 +74,13 @@ export default function App() {
         </div>
       </header>
 
+      {/* Top Banner */}
+      <div className="w-full max-w-4xl mx-auto mt-4 px-4 overflow-hidden">
+        <AdsterraBanner adKey="dbafab497b2e2273265aadff753fe42b" width={728} height={90} />
+      </div>
+
       {/* Main Content */}
-      <main className="w-full max-w-xl px-4 py-8 space-y-8 pb-20">
+      <main className="w-full max-w-xl px-4 py-8 space-y-8 pb-20 relative">
         
         {/* Video Section */}
         <section className="bg-white rounded-2xl shadow-soft border border-slate-100 overflow-hidden group">
@@ -62,6 +107,9 @@ export default function App() {
             <ExternalLink className="w-4 h-4 text-slate-400" />
           </div>
         </section>
+
+        {/* Ad Unit 300x250 */}
+        <AdsterraBanner adKey="48b1cc48e511856854b8b4cd20aa16b6" width={300} height={250} />
 
         {/* Text Section */}
         <div className="text-center space-y-2">
@@ -96,6 +144,9 @@ export default function App() {
           ))}
         </div>
 
+        {/* Ad Unit 468x60 */}
+        <AdsterraBanner adKey="8e8ff51a4fe91d177dc15cd7a8eae34f" width={468} height={60} />
+
         {/* Action Image/Link */}
         <div className="space-y-4">
           <motion.div
@@ -119,14 +170,24 @@ export default function App() {
           </motion.div>
 
           {/* CTA Below Image */}
-          <div className="text-center">
+          <div className="text-center flex flex-col gap-4">
             <a 
               href={hotmartLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-xl font-black text-xl shadow-lg hover:bg-emerald-700 active:scale-95 transition-all w-full md:w-auto"
+              className="inline-flex items-center justify-center gap-2 bg-emerald-600 text-white px-8 py-4 rounded-xl font-black text-xl shadow-lg hover:bg-emerald-700 active:scale-95 transition-all w-full"
             >
               ¡HAZ CLIC AQUÍ! <ExternalLink className="w-6 h-6" />
+            </a>
+            
+            {/* Direct Link / Bonus Link */}
+            <a 
+              href={directLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center justify-center gap-2 text-emerald-600 font-bold hover:underline transition-all py-2"
+            >
+              <Zap className="w-4 h-4" /> OBTENER MÁS CÓDIGOS GRATIS <Zap className="w-4 h-4" />
             </a>
           </div>
         </div>
